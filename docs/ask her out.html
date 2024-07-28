@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask Her Out</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #ffc0cb; /* Light pink background */
+            overflow: hidden; /* Prevent scrollbars */
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column; /* Arrange items vertically */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stage-image {
+            width: 300px; /* Adjust width as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 20px; /* Space between image and dialog box */
+        }
+
+        #proposal-section, #retry-section, #final-message, #no-option-message {
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white */
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+            z-index: 1; /* Ensure content is above the background image */
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .emoji {
+            font-size: 24px; /* Adjust size as needed */
+            vertical-align: middle; /* Align with text */
+            margin-left: 5px; /* Space between text and emoji */
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .heartbeat {
+            animation: heartbeat 1s infinite;
+        }
+
+        #no-option-message {
+            display: none; /* Initially hidden */
+            font-size: 20px;
+            color: #ff0000; /* Red color for emphasis */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Images for different stages -->
+        <img src="proposal-image.jpg" alt="Proposal Image" id="proposal-image" class="stage-image">
+        <img src="retry-image.jpg" alt="Retry Image" id="retry-image" class="stage-image" style="display: none;">
+        <img src="final-image.jpg" alt="Final Image" id="final-image" class="stage-image" style="display: none;">
+        
+        <!-- Proposal Section -->
+        <div id="proposal-section">
+            <h1>Will you marry me? 💍❤️</h1>
+            <button id="yes-btn">Yes (●'◡'●)</button>
+            <button id="no-btn">No （︶^︶）</button>
+        </div>
+        
+        <!-- Retry Section -->
+        <div id="retry-section" style="display: none;">
+            <h1>Please, maan jao na 😿💖</h1>
+            <button id="retry-yes-btn">Yes (●'◡'●)</button>
+            <button id="retry-no-btn">No （︶^︶）</button>
+        </div>
+        
+        <!-- Final Message Section -->
+        <div id="final-message" style="display: none;">
+            <h1>I knew it, I love you a lot, meri khanku! 💕o((>ω< ))o</h1>
+        </div>
+
+        <!-- No Option Message -->
+        <div id="no-option-message">
+            No is not an option! 😿💔
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const yesButton = document.getElementById('yes-btn');
+            const noButton = document.getElementById('no-btn');
+            const retryYesButton = document.getElementById('retry-yes-btn');
+            const retryNoButton = document.getElementById('retry-no-btn');
+            const proposalSection = document.getElementById('proposal-section');
+            const retrySection = document.getElementById('retry-section');
+            const finalMessageSection = document.getElementById('final-message');
+            const noOptionMessage = document.getElementById('no-option-message');
+            const proposalImage = document.getElementById('proposal-image');
+            const retryImage = document.getElementById('retry-image');
+            const finalImage = document.getElementById('final-image');
+
+            function applyHeartbeatEffect(element) {
+                element.classList.add('heartbeat');
+            }
+
+            function removeHeartbeatEffect(element) {
+                element.classList.remove('heartbeat');
+            }
+
+            yesButton.addEventListener('click', function() {
+                finalMessageSection.style.display = 'block';
+                proposalSection.style.display = 'none';
+                retrySection.style.display = 'none';
+                proposalImage.style.display = 'none';
+                retryImage.style.display = 'none';
+                finalImage.style.display = 'block';
+
+                // Add heartbeat effect to final message
+                applyHeartbeatEffect(finalMessageSection);
+            });
+
+            noButton.addEventListener('click', function() {
+                proposalSection.style.display = 'none';
+                retrySection.style.display = 'block';
+                proposalImage.style.display = 'none';
+                retryImage.style.display = 'block';
+                finalImage.style.display = 'none';
+            });
+
+            retryYesButton.addEventListener('click', function() {
+                finalMessageSection.style.display = 'block';
+                retrySection.style.display = 'none';
+                proposalImage.style.display = 'none';
+                retryImage.style.display = 'none';
+                finalImage.style.display = 'block';
+
+                // Add heartbeat effect to final message
+                applyHeartbeatEffect(finalMessageSection);
+            });
+
+            retryNoButton.addEventListener('click', function() {
+                // Show the "No is not an option" message
+                noOptionMessage.style.display = 'block';
+                setTimeout(() => {
+                    noOptionMessage.style.display = 'none';
+                }, 3000); // Hide message after 3 seconds
+            });
+        });
+    </script>
+</body>
+</html>
